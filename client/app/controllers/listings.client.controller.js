@@ -79,6 +79,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
         successfully finished, navigate back to the 'listing.list' state using $state.go(). If an error
         occurs, pass it to $scope.error.
        */
+       debugger;
        $scope.error = null;
 
        if (!isValid) {
@@ -86,7 +87,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
          return false;
        }
 
-       Listings.update($scope.listing)
+       Listings.update( $stateParams.listingId, $scope.listing)
                .then(function(response) {
                  $state.go('listings.list', { successMessage: 'Listing successfully updated!'});
                }, function(error) {
