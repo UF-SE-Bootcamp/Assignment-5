@@ -123,5 +123,18 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
       },
       zoom: 14
     }
+
+    $scope.getListings = function() {
+      $scope.listings = [];
+      Listings.getAll().then(function(response) {
+        response.data.forEach(function(listing){
+          if(listing.coordinates) { // has coordinates and can be displayed
+            $scope.listings.push(listing);
+          }
+        });
+      }, function(error) {
+        $scope.error = 'Unable to get listings.\n' + error;
+      });
+    };
   }
 ]);
